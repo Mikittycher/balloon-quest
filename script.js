@@ -342,7 +342,7 @@ function checkAnswer(event) {
 playPopSound();
     resultElement.textContent = "せいかい！🎉";
     selectedButton.classList.add("correct-answer");
-
+    selectedButton.classList.add("pop-animation");
     answerButtons.forEach(button => {
       button.disabled = true;
     });
@@ -355,7 +355,7 @@ playPopSound();
       return;
     }
 
-    setTimeout(showQuestion, 800);
+    setTimeout(showQuestion, 900);
   } else {
     lives--;
 
