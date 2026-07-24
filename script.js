@@ -168,7 +168,27 @@ let answerButtons = document.querySelectorAll(
 if (answerButtons.length === 0) {
   answerButtons = document.querySelectorAll("#answers button");
 }
-const popSound = new Audio("pop.mp3");
+function playPopSound() {
+  const audio = new (window.AudioContext || window.webkitAudioContext)();
+
+  const osc = audio.createOscillator();
+  const gain = audio.createGain();
+
+  osc.type = "triangle";
+  osc.frequency.setValueAtTime(500, audio.currentTime);
+
+  gain.gain.setValueAtTime(0.3, audio.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audio.currentTime + 0.15
+  );
+
+  osc.connect(gain);
+  gain.connect(audio.destination);
+
+  osc.start();
+  osc.stop(audio.currentTime + 0.15);
+}
 // ==============================
 // 配列をランダムに並べ替える
 // ==============================
@@ -274,8 +294,7 @@ function checkAnswer(event) {
 
   if (selectedAnswer === currentQuestion.answer) {
     score++;
-popSound.currentTime = 0;
-popSound.play();
+playPopSound();
     resultElement.textContent = "せいかい！🎉";
     selectedButton.classList.add("correct-answer");
 
