@@ -9,10 +9,10 @@ const questions = [
   { word: "pen", answer: "ペン", type: "noun" },
   { word: "desk", answer: "机", type: "noun" },
   { word: "chair", answer: "椅子", type: "noun" },
-  { word: "teacher", answer: "先生・教師", type: "noun" },
-  { word: "student", answer: "生徒・学生", type: "noun" },
+  { word: "teacher", answer: "先生", type: "noun" },
+  { word: "student", answer: "生徒", type: "noun" },
   { word: "school", answer: "学校", type: "noun" },
-  { word: "class", answer: "授業・クラス", type: "noun" },
+  { word: "class", answer: "授業", type: "noun" },
   { word: "bag", answer: "かばん", type: "noun" },
   { word: "computer", answer: "コンピュータ", type: "noun" },
 
@@ -44,7 +44,7 @@ const questions = [
   { word: "Sunday", answer: "日曜日", type: "noun" },
   { word: "Monday", answer: "月曜日", type: "noun" },
   { word: "time", answer: "時間・時刻", type: "noun" },
-  { word: "day", answer: "日・1日", type: "noun" },
+  { word: "day", answer: "日", type: "noun" },
   { word: "today", answer: "今日", type: "noun" },
   { word: "house", answer: "家", type: "noun" },
   { word: "park", answer: "公園", type: "noun" },
@@ -62,10 +62,10 @@ const questions = [
   { word: "bus", answer: "バス", type: "noun" },
   { word: "music", answer: "音楽", type: "noun" },
   { word: "sport", answer: "スポーツ", type: "noun" },
-  { word: "picture", answer: "写真・絵", type: "noun" },
+  { word: "picture", answer: "写真", type: "noun" },
 
   // 動作・行動
-  { word: "play", answer: "遊ぶ・する・演奏する", type: "verb" },
+  { word: "play", answer: "遊ぶ", type: "verb" },
   { word: "run", answer: "走る", type: "verb" },
   { word: "walk", answer: "歩く", type: "verb" },
   { word: "swim", answer: "泳ぐ", type: "verb" },
@@ -85,35 +85,35 @@ const questions = [
   { word: "hear", answer: "聞こえる", type: "verb" },
   { word: "know", answer: "知っている", type: "verb" },
   { word: "learn", answer: "学ぶ", type: "verb" },
-  { word: "talk", answer: "話す・会話する", type: "verb" },
-  { word: "ask", answer: "尋ねる・質問する", type: "verb" },
+  { word: "talk", answer: "話す", type: "verb" },
+  { word: "ask", answer: "尋ねる", type: "verb" },
 
   // 気持ち・所有・その他
-  { word: "like", answer: "好きである", type: "verb" },
-  { word: "want", answer: "欲しい・したい", type: "verb" },
+  { word: "like", answer: "好き", type: "verb" },
+  { word: "want", answer: "欲しい", type: "verb" },
   { word: "have", answer: "持っている", type: "verb" },
-  { word: "look", answer: "見る・目を向ける", type: "verb" },
-  { word: "see", answer: "見る・会う", type: "verb" },
+  { word: "look", answer: "見る", type: "verb" },
+  { word: "see", answer: "見る", type: "verb" },
   { word: "make", answer: "作る", type: "verb" },
   { word: "use", answer: "使う", type: "verb" },
   { word: "buy", answer: "買う", type: "verb" },
-  { word: "live", answer: "住んでいる・生きる", type: "verb" },
-  { word: "help", answer: "助ける・手伝う", type: "verb" },
+  { word: "live", answer: "住んでいる", type: "verb" },
+  { word: "help", answer: "手伝う", type: "verb" },
 
   // 状態・性質
   { word: "good", answer: "良い", type: "adjective" },
   { word: "bad", answer: "悪い", type: "adjective" },
   { word: "big", answer: "大きい", type: "adjective" },
   { word: "small", answer: "小さい", type: "adjective" },
-  { word: "hot", answer: "暑い・熱い", type: "adjective" },
-  { word: "cold", answer: "寒い・冷たい", type: "adjective" },
+  { word: "hot", answer: "暑い", type: "adjective" },
+  { word: "cold", answer: "寒い", type: "adjective" },
   { word: "new", answer: "新しい", type: "adjective" },
-  { word: "old", answer: "古い・年をとった", type: "adjective" },
+  { word: "old", answer: "古い", type: "adjective" },
   { word: "busy", answer: "忙しい", type: "adjective" },
-  { word: "fine", answer: "元気な・すばらしい", type: "adjective" },
+  { word: "fine", answer: "元気な", type: "adjective" },
 
   // 感情・外見・色
-  { word: "happy", answer: "幸せな・嬉しい", type: "adjective" },
+  { word: "happy", answer: "幸せな", type: "adjective" },
   { word: "sad", answer: "悲しい", type: "adjective" },
   { word: "cute", answer: "かわいい", type: "adjective" },
   { word: "tall", answer: "背が高い", type: "adjective" },
@@ -153,7 +153,12 @@ const resultElement =
 const speakButton =
   document.querySelector("#speak-button") ||
   document.querySelector("#speak-btn") ||
-  document.querySelector("#pronunciation-button");
+  document.querySelector("#pronunciation-button") ||
+  document.querySelector(".speak-button") ||
+  document.querySelector(".speak-btn") ||
+  [...document.querySelectorAll("button")].find(button =>
+    button.textContent.includes("発音")
+  );
 
 let answerButtons = document.querySelectorAll(
   "button.balloon, .answer-btn, .choice"
@@ -363,16 +368,21 @@ function speakWord() {
     return;
   }
 
+  if (!("speechSynthesis" in window)) {
+    alert("このブラウザでは発音機能を利用できません。");
+    return;
+  }
+
   window.speechSynthesis.cancel();
 
-  const speech = new SpeechSynthesisUtterance(
-    currentQuestion.word
-  );
-
+  const speech = new SpeechSynthesisUtterance(currentQuestion.word);
   speech.lang = "en-US";
-  speech.rate = 0.8;
+  speech.rate = 0.75;
+  speech.pitch = 1;
 
-  window.speechSynthesis.speak(speech);
+  setTimeout(() => {
+    window.speechSynthesis.speak(speech);
+  }, 100);
 }
 
 // ==============================
