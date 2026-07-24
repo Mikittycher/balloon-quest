@@ -4,29 +4,29 @@
 // ==============================
 
 const questions = [
-  // 学校・勉強
-  { word: "book", answer: "本", type: "noun" },
-  { word: "pen", answer: "ペン", type: "noun" },
-  { word: "desk", answer: "机", type: "noun" },
-  { word: "chair", answer: "椅子", type: "noun" },
-  { word: "teacher", answer: "先生", type: "noun" },
-  { word: "student", answer: "生徒", type: "noun" },
-  { word: "school", answer: "学校", type: "noun" },
-  { word: "class", answer: "授業", type: "noun" },
-  { word: "bag", answer: "かばん", type: "noun" },
-  { word: "computer", answer: "コンピュータ", type: "noun" },
+// 学校・勉強
+{ word: "book", answer: "本", ruby: "ほん", type: "noun" },
+{ word: "pen", answer: "ペン", ruby: "", type: "noun" },
+{ word: "desk", answer: "机", ruby: "つくえ", type: "noun" },
+{ word: "chair", answer: "椅子", ruby: "いす", type: "noun" },
+{ word: "teacher", answer: "先生", ruby: "せんせい", type: "noun" },
+{ word: "student", answer: "生徒", ruby: "せいと", type: "noun" },
+{ word: "school", answer: "学校", ruby: "がっこう", type: "noun" },
+{ word: "class", answer: "授業", ruby: "じゅぎょう", type: "noun" },
+{ word: "bag", answer: "かばん", ruby: "", type: "noun" },
+{ word: "computer", answer: "コンピュータ", ruby: "", type: "noun" },
 
-  // 家族・人
-  { word: "father", answer: "父親", type: "noun" },
-  { word: "mother", answer: "母親", type: "noun" },
-  { word: "brother", answer: "兄・弟", type: "noun" },
-  { word: "sister", answer: "姉・妹", type: "noun" },
-  { word: "friend", answer: "友達", type: "noun" },
-  { word: "boy", answer: "男の子", type: "noun" },
-  { word: "girl", answer: "女の子", type: "noun" },
-  { word: "man", answer: "男性", type: "noun" },
-  { word: "woman", answer: "女性", type: "noun" },
-  { word: "family", answer: "家族", type: "noun" },
+// 家族・人
+{ word: "father", answer: "父親", ruby: "ちちおや", type: "noun" },
+{ word: "mother", answer: "母親", ruby: "ははおや", type: "noun" },
+{ word: "brother", answer: "兄・弟", ruby: "あに・おとうと", type: "noun" },
+{ word: "sister", answer: "姉・妹", ruby: "あね・いもうと", type: "noun" },
+{ word: "friend", answer: "友達", ruby: "ともだち", type: "noun" },
+{ word: "boy", answer: "男の子", ruby: "おとこのこ", type: "noun" },
+{ word: "girl", answer: "女の子", ruby: "おんなのこ", type: "noun" },
+{ word: "man", answer: "男性", ruby: "だんせい", type: "noun" },
+{ word: "woman", answer: "女性", ruby: "じょせい", type: "noun" },
+{ word: "family", answer: "家族", ruby: "かぞく", type: "noun" },
 
   // 食べ物・飲み物
   { word: "apple", answer: "りんご", type: "noun" },
@@ -43,7 +43,7 @@ const questions = [
   // 曜日・時・場所
   { word: "Sunday", answer: "日曜日", type: "noun" },
   { word: "Monday", answer: "月曜日", type: "noun" },
-  { word: "time", answer: "時間・時刻", type: "noun" },
+  { word: "time", answer: "時間", type: "noun" },
   { word: "day", answer: "日", type: "noun" },
   { word: "today", answer: "今日", type: "noun" },
   { word: "house", answer: "家", type: "noun" },
@@ -74,16 +74,16 @@ const questions = [
   { word: "eat", answer: "食べる", type: "verb" },
   { word: "drink", answer: "飲む", type: "verb" },
   { word: "sleep", answer: "寝る", type: "verb" },
-  { word: "cook", answer: "料理する", type: "verb" },
+  { word: "cook", answer: "料理", type: "verb" },
 
   // 学習・情報・コミュニケーション
-  { word: "study", answer: "勉強する", type: "verb" },
+  { word: "study", answer: "勉強", type: "verb" },
   { word: "read", answer: "読む", type: "verb" },
   { word: "write", answer: "書く", type: "verb" },
   { word: "speak", answer: "話す", type: "verb" },
   { word: "listen", answer: "聴く", type: "verb" },
-  { word: "hear", answer: "聞こえる", type: "verb" },
-  { word: "know", answer: "知っている", type: "verb" },
+  { word: "hear", answer: "聞く", type: "verb" },
+  { word: "know", answer: "知る", type: "verb" },
   { word: "learn", answer: "学ぶ", type: "verb" },
   { word: "talk", answer: "話す", type: "verb" },
   { word: "ask", answer: "尋ねる", type: "verb" },
@@ -91,13 +91,13 @@ const questions = [
   // 気持ち・所有・その他
   { word: "like", answer: "好き", type: "verb" },
   { word: "want", answer: "欲しい", type: "verb" },
-  { word: "have", answer: "持っている", type: "verb" },
+  { word: "have", answer: "持つ", type: "verb" },
   { word: "look", answer: "見る", type: "verb" },
   { word: "see", answer: "見る", type: "verb" },
   { word: "make", answer: "作る", type: "verb" },
   { word: "use", answer: "使う", type: "verb" },
   { word: "buy", answer: "買う", type: "verb" },
-  { word: "live", answer: "住んでいる", type: "verb" },
+  { word: "live", answer: "住む", type: "verb" },
   { word: "help", answer: "手伝う", type: "verb" },
 
   // 状態・性質
@@ -110,10 +110,10 @@ const questions = [
   { word: "new", answer: "新しい", type: "adjective" },
   { word: "old", answer: "古い", type: "adjective" },
   { word: "busy", answer: "忙しい", type: "adjective" },
-  { word: "fine", answer: "元気な", type: "adjective" },
+  { word: "fine", answer: "元気", type: "adjective" },
 
   // 感情・外見・色
-  { word: "happy", answer: "幸せな", type: "adjective" },
+  { word: "happy", answer: "幸せ", type: "adjective" },
   { word: "sad", answer: "悲しい", type: "adjective" },
   { word: "cute", answer: "かわいい", type: "adjective" },
   { word: "tall", answer: "背が高い", type: "adjective" },
@@ -121,8 +121,8 @@ const questions = [
   { word: "blue", answer: "青い", type: "adjective" },
   { word: "white", answer: "白い", type: "adjective" },
   { word: "black", answer: "黒い", type: "adjective" },
-  { word: "favorite", answer: "お気に入りの", type: "adjective" },
-  { word: "kind", answer: "親切な", type: "adjective" }
+  { word: "favorite", answer: "大好きな", type: "adjective" },
+  { word: "kind", answer: "親切", type: "adjective" }
 ];
 
 // ==============================
@@ -304,8 +304,18 @@ function showQuestion() {
   resultElement.textContent = "";
 
   answerButtons.forEach((button, index) => {
+        const item = questions.find(q => q.answer === choices[index]);
+
+if (item && item.ruby) {
+    button.innerHTML = `<ruby>${item.answer}<rt>${item.ruby}</rt></ruby>`;
+
+    } else {
     button.textContent = choices[index];
-    button.disabled = false;
+}
+
+button.dataset.answer = choices[index];
+
+button.disabled = false;
 
     // 前の問題の色を元に戻す
     button.classList.remove("correct-answer");
@@ -325,7 +335,7 @@ function checkAnswer(event) {
   }
 
   const selectedButton = event.currentTarget;
-  const selectedAnswer = selectedButton.textContent;
+  const selectedAnswer = selectedButton.dataset.answer;
 
   if (selectedAnswer === currentQuestion.answer) {
     score++;
