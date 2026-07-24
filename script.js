@@ -183,49 +183,41 @@ async function playPopSound() {
   }
 
   if (
-  popAudioContext.state === "suspended" ||
-  popAudioContext.state === "interrupted"
-) {
-  await popAudioContext.resume();
-}
-
-  const duration = 0.2;
-  const sampleRate = popAudioContext.sampleRate;
-  const bufferLength = Math.floor(sampleRate * duration);
-
-  const buffer = popAudioContext.createBuffer(
-    1,
-    bufferLength,
-    sampleRate
-  );
-
-  const data = buffer.getChannelData(0);
-
-  for (let i = 0; i < bufferLength; i++) {
-    const fade = Math.pow(1 - i / bufferLength, 4);
-    data[i] = (Math.random() * 2 - 1) * fade;
+    popAudioContext.state === "suspended" ||
+    popAudioContext.state === "interrupted"
+  ) {
+    await popAudioContext.resume();
   }
 
-  const source = popAudioContext.createBufferSource();
+  const oscillator = popAudioContext.createOscillator();
   const gain = popAudioContext.createGain();
-  const filter = popAudioContext.createBiquadFilter();
 
-  source.buffer = buffer;
-
-  filter.type = "highpass";
-  filter.frequency.value = 500;
-
-  gain.gain.setValueAtTime(1, popAudioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(
-    0.01,
-    popAudioContext.currentTime + duration
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(
+    500,
+    popAudioContext.currentTime
   );
 
-  source.connect(filter);
-  filter.connect(gain);
+  oscillator.frequency.exponentialRampToValueAtTime(
+    120,
+    popAudioContext.currentTime + 0.15
+  );
+
+  gain.gain.setValueAtTime(
+    0.8,
+    popAudioContext.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.01,
+    popAudioContext.currentTime + 0.15
+  );
+
+  oscillator.connect(gain);
   gain.connect(popAudioContext.destination);
 
-  source.start();
+  oscillator.start();
+  oscillator.stop(popAudioContext.currentTime + 0.15);
 }
 // ==============================
 // 配列をランダムに並べ替える
