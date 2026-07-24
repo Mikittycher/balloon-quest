@@ -108,28 +108,28 @@ body {
 
 .balloon:nth-child(1) {
     left: 5%;
-    animation-duration: 13s;
+    animation-duration: 10s;
     animation-delay: 0s;
 }
 
 .balloon:nth-child(2) {
     left: auto;
     right: 5%;
-    animation-duration: 13s;
-    animation-delay: -3.25s;
+    animation-duration: 10s;
+    animation-delay: -1s;
 }
 
 .balloon:nth-child(3) {
     left: 5%;
-    animation-duration: 13s;
-    animation-delay: -6.5s;
+    animation-duration: 10s;
+    animation-delay: -5s;
 }
 
 .balloon:nth-child(4) {
     left: auto;
     right: 5%;
-    animation-duration: 13s;
-    animation-delay: -9.75s;
+    animation-duration: 10s;
+    animation-delay: -6s;
 }
 
 @keyframes rise {
