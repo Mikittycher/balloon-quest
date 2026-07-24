@@ -170,7 +170,7 @@ if (answerButtons.length === 0) {
 }
 let popAudioContext;
 
-async function playPopSound() {
+function playPopSound() {
   const AudioContextClass =
     window.AudioContext || window.webkitAudioContext;
 
@@ -182,42 +182,41 @@ async function playPopSound() {
     popAudioContext = new AudioContextClass();
   }
 
+  function makeSound() {
+    const now = popAudioContext.currentTime;
+
+    const oscillator = popAudioContext.createOscillator();
+    const gain = popAudioContext.createGain();
+
+    oscillator.type = "square";
+
+    oscillator.frequency.setValueAtTime(700, now);
+    oscillator.frequency.exponentialRampToValueAtTime(
+      100,
+      now + 0.18
+    );
+
+    gain.gain.setValueAtTime(0.7, now);
+    gain.gain.exponentialRampToValueAtTime(
+      0.01,
+      now + 0.18
+    );
+
+    oscillator.connect(gain);
+    gain.connect(popAudioContext.destination);
+
+    oscillator.start(now);
+    oscillator.stop(now + 0.18);
+  }
+
   if (
     popAudioContext.state === "suspended" ||
     popAudioContext.state === "interrupted"
   ) {
-    await popAudioContext.resume();
+    popAudioContext.resume().then(makeSound);
+  } else {
+    makeSound();
   }
-
-  const oscillator = popAudioContext.createOscillator();
-  const gain = popAudioContext.createGain();
-
-  oscillator.type = "sine";
-  oscillator.frequency.setValueAtTime(
-    500,
-    popAudioContext.currentTime
-  );
-
-  oscillator.frequency.exponentialRampToValueAtTime(
-    120,
-    popAudioContext.currentTime + 0.15
-  );
-
-  gain.gain.setValueAtTime(
-    0.8,
-    popAudioContext.currentTime
-  );
-
-  gain.gain.exponentialRampToValueAtTime(
-    0.01,
-    popAudioContext.currentTime + 0.15
-  );
-
-  oscillator.connect(gain);
-  gain.connect(popAudioContext.destination);
-
-  oscillator.start();
-  oscillator.stop(popAudioContext.currentTime + 0.15);
 }
 // ==============================
 // 配列をランダムに並べ替える
