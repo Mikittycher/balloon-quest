@@ -92,27 +92,29 @@ body {
 }
 
 .balloon:nth-child(1) {
-  left: 5%;
-  animation-duration: 12s;
-  animation-delay: 0s;
+    left: 3%;
+    animation-duration: 16s;
+    animation-delay: 0s;
 }
 
 .balloon:nth-child(2) {
-  left: 56%;
-  animation-duration: 14s;
-  animation-delay: -1.5s;
+    left: auto;
+    right: 3%;
+    animation-duration: 16s;
+    animation-delay: -4s;
 }
 
 .balloon:nth-child(3) {
-  left: 28%;
-  animation-duration: 13s;
-  animation-delay: -3s;
+    left: 3%;
+    animation-duration: 16s;
+    animation-delay: -8s;
 }
 
 .balloon:nth-child(4) {
-  left: 68%;
-  animation-duration: 15s;
-  animation-delay: -4.2s;
+    left: auto;
+    right: 3%;
+    animation-duration: 16s;
+    animation-delay: -12s;
 }
 
 @keyframes rise {
