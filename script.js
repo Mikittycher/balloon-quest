@@ -318,8 +318,10 @@ button.dataset.answer = choices[index];
 button.disabled = false;
 
     // 前の問題の色を元に戻す
-    button.classList.remove("correct-answer");
-    button.classList.remove("wrong-answer");
+    
+button.classList.remove("correct-answer");
+button.classList.remove("wrong-answer");
+button.classList.remove("pop-animation");
   });
 
   updateDisplay();
