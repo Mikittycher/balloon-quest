@@ -170,7 +170,7 @@ if (answerButtons.length === 0) {
 }
 let popAudioContext;
 
-function playPopSound() {
+async function playPopSound() {
   const AudioContextClass =
     window.AudioContext || window.webkitAudioContext;
 
@@ -182,9 +182,12 @@ function playPopSound() {
     popAudioContext = new AudioContextClass();
   }
 
-  if (popAudioContext.state === "suspended") {
-    popAudioContext.resume();
-  }
+  if (
+  popAudioContext.state === "suspended" ||
+  popAudioContext.state === "interrupted"
+) {
+  await popAudioContext.resume();
+}
 
   const duration = 0.2;
   const sampleRate = popAudioContext.sampleRate;
