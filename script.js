@@ -168,26 +168,61 @@ let answerButtons = document.querySelectorAll(
 if (answerButtons.length === 0) {
   answerButtons = document.querySelectorAll("#answers button");
 }
+let popAudioContext;
+
 function playPopSound() {
-  const audio = new (window.AudioContext || window.webkitAudioContext)();
+  const AudioContextClass =
+    window.AudioContext || window.webkitAudioContext;
 
-  const osc = audio.createOscillator();
-  const gain = audio.createGain();
+  if (!AudioContextClass) {
+    return;
+  }
 
-  osc.type = "triangle";
-  osc.frequency.setValueAtTime(500, audio.currentTime);
+  if (!popAudioContext) {
+    popAudioContext = new AudioContextClass();
+  }
 
-  gain.gain.setValueAtTime(0.3, audio.currentTime);
-  gain.gain.exponentialRampToValueAtTime(
-    0.001,
-    audio.currentTime + 0.15
+  if (popAudioContext.state === "suspended") {
+    popAudioContext.resume();
+  }
+
+  const duration = 0.2;
+  const sampleRate = popAudioContext.sampleRate;
+  const bufferLength = Math.floor(sampleRate * duration);
+
+  const buffer = popAudioContext.createBuffer(
+    1,
+    bufferLength,
+    sampleRate
   );
 
-  osc.connect(gain);
-  gain.connect(audio.destination);
+  const data = buffer.getChannelData(0);
 
-  osc.start();
-  osc.stop(audio.currentTime + 0.15);
+  for (let i = 0; i < bufferLength; i++) {
+    const fade = Math.pow(1 - i / bufferLength, 4);
+    data[i] = (Math.random() * 2 - 1) * fade;
+  }
+
+  const source = popAudioContext.createBufferSource();
+  const gain = popAudioContext.createGain();
+  const filter = popAudioContext.createBiquadFilter();
+
+  source.buffer = buffer;
+
+  filter.type = "highpass";
+  filter.frequency.value = 500;
+
+  gain.gain.setValueAtTime(1, popAudioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.01,
+    popAudioContext.currentTime + duration
+  );
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(popAudioContext.destination);
+
+  source.start();
 }
 // ==============================
 // 配列をランダムに並べ替える
