@@ -168,7 +168,7 @@ let answerButtons = document.querySelectorAll(
 if (answerButtons.length === 0) {
   answerButtons = document.querySelectorAll("#answers button");
 }
-
+const popSound = new Audio("pop.mp3");
 // ==============================
 // 配列をランダムに並べ替える
 // ==============================
@@ -274,7 +274,8 @@ function checkAnswer(event) {
 
   if (selectedAnswer === currentQuestion.answer) {
     score++;
-
+popSound.currentTime = 0;
+popSound.play();
     resultElement.textContent = "せいかい！🎉";
     selectedButton.classList.add("correct-answer");
 
