@@ -134,7 +134,7 @@ body {
 
 @keyframes rise {
   0% {
-    top: 100%;
+    top: 70%;
     transform: translateX(0) rotate(-2deg);
   }
 
