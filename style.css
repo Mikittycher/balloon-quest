@@ -92,32 +92,32 @@ body {
 }
 
 .balloon:nth-child(1) {
-  left: 3%;
+  left: 5%;
   animation-duration: 12s;
   animation-delay: 0s;
 }
 
 .balloon:nth-child(2) {
-  left: 54%;
+  left: 56%;
   animation-duration: 14s;
   animation-delay: -1.5s;
 }
 
 .balloon:nth-child(3) {
-  left: 10%;
+  left: 28%;
   animation-duration: 13s;
   animation-delay: -3s;
 }
 
 .balloon:nth-child(4) {
-  left: 50%;
+  left: 68%;
   animation-duration: 15s;
   animation-delay: -4.2s;
 }
 
 @keyframes rise {
   0% {
-    top: 105%;
+    top: 100%;
     transform: translateX(0) rotate(-2deg);
   }
 
