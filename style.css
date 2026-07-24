@@ -155,3 +155,28 @@ body {
     transform: translateX(-10px) rotate(-2deg);
   }
 }
+.pop-animation {
+    animation: balloonPop 0.7s ease-out forwards !important;
+}
+
+@keyframes balloonPop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    40% {
+        transform: scale(1.25);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.7);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
