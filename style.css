@@ -116,7 +116,7 @@ body {
     left: auto;
     right: 5%;
     animation-duration: 10s;
-    animation-delay: -1s;
+    animation-delay: -2.5s;
 }
 
 .balloon:nth-child(3) {
@@ -129,7 +129,7 @@ body {
     left: auto;
     right: 5%;
     animation-duration: 10s;
-    animation-delay: -6s;
+    animation-delay: -7.5s;
 }
 
 @keyframes rise {
