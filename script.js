@@ -346,15 +346,15 @@ playPopSound();
     selectedButton.classList.add("correct-answer");
     selectedButton.animate(
     [
-        { transform: "scale(1)", opacity: 1 },
-        { transform: "scale(1.3)", opacity: 1, offset: 0.35 },
-        { transform: "scale(0.6)", opacity: 0.5, offset: 0.7 },
-        { transform: "scale(0)", opacity: 0 }
+        { scale: 1, opacity: 1 },
+        { scale: 1.3, opacity: 1, offset: 0.35 },
+        { scale: 0.6, opacity: 0.5, offset: 0.7 },
+        { scale: 0, opacity: 0 }
     ],
     {
         duration: 700,
         easing: "ease-out",
-        fill: "forwards"
+        fill: "none"
     }
 );
     answerButtons.forEach(button => {
