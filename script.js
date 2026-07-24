@@ -344,7 +344,19 @@ function checkAnswer(event) {
 playPopSound();
     resultElement.textContent = "せいかい！🎉";
     selectedButton.classList.add("correct-answer");
-    selectedButton.classList.add("pop-animation");
+    selectedButton.animate(
+    [
+        { transform: "scale(1)", opacity: 1 },
+        { transform: "scale(1.3)", opacity: 1, offset: 0.35 },
+        { transform: "scale(0.6)", opacity: 0.5, offset: 0.7 },
+        { transform: "scale(0)", opacity: 0 }
+    ],
+    {
+        duration: 700,
+        easing: "ease-out",
+        fill: "forwards"
+    }
+);
     answerButtons.forEach(button => {
       button.disabled = true;
     });
