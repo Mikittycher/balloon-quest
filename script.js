@@ -376,6 +376,7 @@ function clearGame() {
         button.disabled = true;
     });
 
+    setTimeout(() => {
     const playAgain = confirm("🎉 CLEAR!\n\nもう一度遊びますか？");
 
     if (playAgain) {
@@ -384,6 +385,7 @@ function clearGame() {
         wordElement.textContent = "Thank you!";
         resultElement.textContent = "Thanks for playing Balloon Quest!";
     }
+}, 3000);
 }
 
 // ==============================
