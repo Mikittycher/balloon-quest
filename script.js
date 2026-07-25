@@ -366,15 +366,24 @@ function updateDisplay() {
 // ==============================
 
 function clearGame() {
- playClearSound();
- gameFinished = true;
+    playClearSound();
+    gameFinished = true;
 
-  wordElement.textContent = "CLEAR!";
-  resultElement.textContent = "10問正解！おめでとう！🎈🎉";
+    wordElement.textContent = "CLEAR!";
+    resultElement.textContent = "10問正解！おめでとう！";
 
-  answerButtons.forEach(button => {
-    button.disabled = true;
-  });
+    answerButtons.forEach(button => {
+        button.disabled = true;
+    });
+
+    const playAgain = confirm("🎉 CLEAR!\n\nもう一度遊びますか？");
+
+    if (playAgain) {
+        location.reload();
+    } else {
+        wordElement.textContent = "Thank you!";
+        resultElement.textContent = "Thanks for playing Balloon Quest!";
+    }
 }
 
 // ==============================
