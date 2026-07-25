@@ -353,7 +353,7 @@ playPopSound();
 
 function updateDisplay() {
   if (scoreElement) {
-    scoreElement.textContent = score;
+    scoreElement.textContent = `${score} / 10 点`;
   }
 
   if (livesElement) {
