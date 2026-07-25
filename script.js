@@ -169,54 +169,22 @@ if (answerButtons.length === 0) {
   answerButtons = document.querySelectorAll("#answers button");
 }
 let popAudioContext;
-
+const popSound = new Audio("小パンチ.mp3");
+const wrongSound = new Audio("クイズ不正解1.mp3");
+const clearSound = new Audio("ラップのファンファーレ.mp3");
 function playPopSound() {
-  const AudioContextClass =
-    window.AudioContext || window.webkitAudioContext;
+  popSound.currentTime = 0;
+  popSound.play();
+}
 
-  if (!AudioContextClass) {
-    return;
-  }
+function playWrongSound() {
+  wrongSound.currentTime = 0;
+  wrongSound.play();
+}
 
-  if (!popAudioContext) {
-    popAudioContext = new AudioContextClass();
-  }
-
-  function makeSound() {
-    console.log(popAudioContext.state);const now = popAudioContext.currentTime;
-
-    const oscillator = popAudioContext.createOscillator();
-    const gain = popAudioContext.createGain();
-
-    oscillator.type = "square";
-
-    oscillator.frequency.setValueAtTime(700, now);
-    oscillator.frequency.exponentialRampToValueAtTime(
-      100,
-      now + 0.18
-    );
-
-    gain.gain.setValueAtTime(0.7, now);
-    gain.gain.exponentialRampToValueAtTime(
-      0.01,
-      now + 0.18
-    );
-
-    oscillator.connect(gain);
-    gain.connect(popAudioContext.destination);
-
-    oscillator.start(now);
-    oscillator.stop(now + 0.18);
-  }
-
-  if (
-    popAudioContext.state === "suspended" ||
-    popAudioContext.state === "interrupted"
-  ) {
-    popAudioContext.resume().then(makeSound);
-  } else {
-    makeSound();
-  }
+function playClearSound() {
+  clearSound.currentTime = 0;
+  clearSound.play();
 }
 // ==============================
 // 配列をランダムに並べ替える
@@ -366,7 +334,7 @@ playPopSound();
     setTimeout(showQuestion, 900);
   } else {
     lives--;
-
+    playWrongSound();
     resultElement.textContent = "おしい！もう一度考えてみよう";
     selectedButton.classList.add("wrong-answer");
     selectedButton.disabled = true;
@@ -398,7 +366,8 @@ function updateDisplay() {
 // ==============================
 
 function clearGame() {
-  gameFinished = true;
+ playClearSound();
+ gameFinished = true;
 
   wordElement.textContent = "CLEAR!";
   resultElement.textContent = "10問正解！おめでとう！🎈🎉";
