@@ -183,7 +183,7 @@ function playPopSound() {
   }
 
   function makeSound() {
-    const now = popAudioContext.currentTime;
+    console.log(popAudioContext.state);const now = popAudioContext.currentTime;
 
     const oscillator = popAudioContext.createOscillator();
     const gain = popAudioContext.createGain();
