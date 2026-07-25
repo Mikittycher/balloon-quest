@@ -169,9 +169,9 @@ if (answerButtons.length === 0) {
   answerButtons = document.querySelectorAll("#answers button");
 }
 let popAudioContext;
-const popSound = new Audio("小パンチ.mp3");
-const wrongSound = new Audio("クイズ不正解1.mp3");
-const clearSound = new Audio("ラップのファンファーレ.mp3");
+const popSound = new Audio("pop.mp3.mp3");
+const wrongSound = new Audio("wrong.mp3.mp3");
+const clearSound = new Audio("clear.mp3.mp3");
 function playPopSound() {
   popSound.currentTime = 0;
   popSound.play();
